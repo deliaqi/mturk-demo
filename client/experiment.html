@@ -1,0 +1,30 @@
+<template name="experiment">
+  <head>
+    <title>demo</title>
+  </head>
+
+  <body>
+    <!-- <h1>Welcome to Monteware's Meteor!</h1> -->
+    {{> home}}
+
+    {{> hello}}
+  </body>
+</template>
+
+
+<template name="hello">
+  <button id="clickMe">Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+
+  <p>测试图像：</p>
+  <img src="img/castle.bmp" class="img-rounded" width="400" height="300">
+
+  <form class="census">
+    <p>请输入图片包含的事物名称:</p>
+    <textarea name="basicInfo" rows="1"></textarea><br/>
+    <!-- <button type="submit">提交</button> -->
+  </form>
+
+  <button id="exitSurvey">完成任务</button>
+  
+</template>

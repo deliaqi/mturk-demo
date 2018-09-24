@@ -10,3 +10,7 @@ Router.route('/experiment', function() {
 Router.route('/survey', function() {
     this.render('survey');
 });
+
+// Router.route('/lobby', function() {
+//   this.render('lobby');
+// });

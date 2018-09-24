@@ -5,24 +5,29 @@ if (Meteor.isClient) {
 	    Router.go('/experiment');
 	} else if (TurkServer.inExitSurvey()) {
 	    Router.go('/survey');
+	} else if (TurkServer.inLobby()) {
+		Router.go('/lobby');
 	}
     });
 
-    Tracker.autorun(function() {
-	var group = TurkServer.group();
-	if (group == null) return;	
-	Meteor.subscribe('clicks', group);
+    Tracker.autorun(function() { //every time the value of this variable changes
+	var group = TurkServer.group(); //returns the id of the experiment that a user is currently in
+	if (group == null) return;	// If the value is not null, then the user is indeed in an experiment
+	Meteor.subscribe('clicks', group); // triggers the publication code on the server
     });
 
     Template.hello.helpers({
 	counter: function () {
+		// get our Click document, we only have access to our own click document
 	    var clickObj = Clicks.findOne();
+	    // // if it exists, return the count field
 	    return clickObj && clickObj.count;
 	}
     });
 
     Template.hello.events({
 	'click button#clickMe': function () {
+		// update our Clicks document
 	    Meteor.call('incClicks');
 	}
     });
@@ -50,9 +55,10 @@ if (Meteor.isServer) {
 	Batches.upsert({name: "main"}, {name: "main", active: true});
 	var batch = TurkServer.Batch.getBatchByName("main");
 	batch.setAssigner(new TurkServer.Assigners.SimpleAssigner);
+	// batch.setAssigner(new TurkServer.Assigners.TestAssigner);
     });
 
-    TurkServer.initialize(function() {
+    TurkServer.initialize(function() { // the start of an experiment
 	var clickObj = {count: 0};
 	Clicks.insert(clickObj);
     });
