@@ -10,7 +10,7 @@ tutorial itself can be found [here][tutorial].
 
 [tutorial]: http://turkserver.readthedocs.io/en/latest/examples/tutorial.html
 
-Clone this repo with the following:
+Clone the original repo with the following:
 
 ```
 git clone https://github.com/TurkServer/tutorial.git
