@@ -24,13 +24,13 @@
   // Location of app (local directory). This can reference '~' as the users home directory.
   // i.e., "app": "~/Meteor/my-app",
   // This is the same as the line below.
-  "app": "/Users/liujiaqi/Git/mengtai/tutorial",
+  "app": "/Users/liujiaqi/Git/mengtai/mturk-demo",
 
   // Configure environment
   // ROOT_URL must be set to your correct domain (https or http)
   "env": {
-    "PORT": 8000,
-    "ROOT_URL": "https://47.254.91.165",
+    "PORT": 3000,
+    "ROOT_URL": "http://47.254.91.165",
     "MONGO_URL": "mongodb://admin:delia13@ds121982.mlab.com:21982/mturk-delia"
   },
 

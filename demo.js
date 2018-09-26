@@ -43,12 +43,19 @@ if (Meteor.isClient) {
 	}
     });
 
-    Template.hello.events(
-	{
-		'click button#confirmLabel': function () {
-			// update our Labels document
-		    Meteor.call('confirmLabel');
-	}
+    Template.hello.events({
+	// 	'click button#confirmLabel': function (e) {
+	// 		// update our Labels document
+	// 		var text = event.target.text.value;
+	// 	    Meteor.call('confirmLabel');
+	// }
+		'submit .mark': function (e) {
+		    e.preventDefault();
+		    // update our Labels document
+			var piclabel = e.target.picLabel.value;
+			// Labels.update({}, {$set: {label: piclabel}});
+			Meteor.call('updateLabel',piclabel);
+		}
     });
 
 
@@ -105,8 +112,9 @@ if (Meteor.isServer) {
 	    asst.addPayment(0.1);
 	},
 	// confirm button
-	confirmLabel: function() {
-		Labels.update({}, {$set: {label: 'something'}});
+	updateLabel: function(piclabel) {
+		// var piclabel = e.target.picLabel.value;
+		Labels.update({}, {$set: {label: piclabel}});
 	}
     });
 

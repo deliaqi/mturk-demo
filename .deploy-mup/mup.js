@@ -13,7 +13,7 @@ module.exports = {
   app: {
     // TODO: change app name and path
     name: 'mturk-demo',
-    path: '/Users/liujiaqi/Git/mengtai/tutorial',
+    path: '/Users/liujiaqi/Git/mengtai/mturk-demo',
 
     servers: {
       one: {},
@@ -26,7 +26,7 @@ module.exports = {
     env: {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
-      ROOT_URL: 'https://47.254.91.165:3001',
+      ROOT_URL: 'http://47.254.91.165:3001',
       MONGO_URL: 'mongodb://admin:delia13@ds121982.mlab.com:21982/mturk-delia',
       MONGO_OPLOG_URL: 'mongodb://admin:delia13@ds121982.mlab.com:21982/mturk-delia',
     },

@@ -14,15 +14,16 @@
 
 <template name="hello">
   <button id="clickMe">Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+  <p>You've pressed the button {{answer}} times.</p>
 
   <p>测试图像：</p>
   <img src="img/castle.bmp" class="img-rounded" width="400" height="300">
 
-  <form class="census">
+  <form class="mark">
     <p>请输入图片包含的事物名称:</p>
-    <textarea name="basicInfo" rows="1"> last: {{answer}}</textarea><br/>
-    <button id="confirmLabel">确定答案</button>
+    <textarea name="picLabel" rows="1">{{answer}}</textarea><br/>
+    <!-- <button id="confirmLabel">确定答案</button> -->
+    <button type="submit">确定答案</button>
   </form>
 
   <button id="exitSurvey">完成任务</button>
