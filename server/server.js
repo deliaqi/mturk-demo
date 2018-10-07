@@ -9,7 +9,7 @@ Meteor.startup(function () {
 	var clickObj = {count: 0};
 	Clicks.insert(clickObj);
 	// intialize for label
-	var labelObj = {label: 'nothing'};
+	var labelObj = {label: 'Your email address'};
 	Labels.insert(labelObj);
     });
 
