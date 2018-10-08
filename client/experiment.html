@@ -12,10 +12,15 @@
 
 
 <template name="hello">
-  <!-- <div class="container">
+  <div class="container">
     <button id="clickMe" class="btn btn-primary">Click Me</button>
     <p>You've pressed the button {{answer}} times.</p>
-  </div> -->
+  </div>
+
+  {{#each counter}}
+    <h1>{{workerId}}</h1>
+    <p>{{_id}}</p>
+  {{/each}}
 
   <div class="container">
       <h2>陌生人关系实验室</h2>
@@ -97,6 +102,7 @@
     <textarea name="picLabel" rows="1">{{answer}}</textarea><br/>
     <!-- <button id="confirmLabel">确定答案</button> -->
     <button type="submit" class="btn btn-primary">确定上传</button>
+    <button id="exitSurvey" class="btn btn-primary">完成实验</button>
     <button id="exitSurvey" class="btn btn-primary">完成实验</button>
   </form>
 

@@ -21,6 +21,7 @@ Meteor.startup(function () {
 	return Labels.find();
     });
 
+
     Meteor.methods({
 	goToExitSurvey: function() {
 	    TurkServer.Instance.currentInstance().teardown();
@@ -29,10 +30,17 @@ Meteor.startup(function () {
 	    Clicks.update({}, {$inc: {count: 1}});
 	    var asst = TurkServer.Assignment.currentAssignment();
 	    asst.addPayment(0.1);
+	    // return 0.1;
 	},
 	// confirm button
 	updateLabel: function(piclabel) {
 		// var piclabel = e.target.picLabel.value;
 		Labels.update({}, {$set: {label: piclabel}});
+	},
+
+	// get users
+	getUsers: function() {
+		var userlist = TurkServer.Instance.currentInstance().users();
+		return userlist;
 	}
  });

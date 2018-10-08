@@ -20,9 +20,9 @@
 		counter: function () {
 			// get our Click document, we only have access to our own click document
 		    var clickObj = Clicks.findOne();
-		    // // if it exists, return the count field
+		    // if it exists, return the count field
 		    return clickObj && clickObj.count;
-	}
+  		}
     });
 
     Template.hello.helpers(
@@ -36,9 +36,20 @@
     Template.hello.events(
     {
 		'click button#clickMe': function () {
-			// update our Clicks document
+			update our Clicks document
 		    Meteor.call('incClicks');
-	}
+		    // return userlist;
+		    Meteor.call('getUsers', function (error, result) {
+  				if (error) {
+    				// handle error
+    				console.log(error);
+  				} else {
+    				return result;
+    			}
+  			});
+
+		
+		}
     });
 
     Template.hello.events({

@@ -3,3 +3,4 @@ Template.lobby.helpers({
     return LobbyStatus.find().count();
   }
 });
+ 
