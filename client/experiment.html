@@ -14,7 +14,7 @@
 <template name="hello">
   <div class="container">
     <button id="clickMe" class="btn btn-primary">Click Me</button>
-    <p>You've pressed the button {{answer}} times.</p>
+    <p>You've pressed the button {{counter}} times.</p>
   </div>
 
   {{#each counter}}
@@ -24,6 +24,7 @@
 
   <div class="container">
       <h2>陌生人关系实验室</h2>
+      <p>当前在线人数：{{people}}</p>
       <img src="img/love.jpg" class="img-rounded" width="600" height="300">
 
       <div class="row" >

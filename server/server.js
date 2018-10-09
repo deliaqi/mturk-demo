@@ -39,8 +39,8 @@ Meteor.startup(function () {
 	},
 
 	// get users
-	getUsers: function() {
+	getUsersCount: function() {
 		var userlist = TurkServer.Instance.currentInstance().users();
-		return userlist;
+		return userlist.length;
 	}
  });

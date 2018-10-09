@@ -16,70 +16,63 @@
     Meteor.subscribe('labels', group);
     });
 
-    Template.hello.helpers({
+    Template.hello.created = function () {
+    	Meteor.call('getUsersCount', function (error, result) {
+			if (error) {
+				console.log(error);
+			} else {
+				Session.set("peopleCount", result)
+			}
+		});
+ 	}
+
+    Template.hello.helpers(
+	{
 		counter: function () {
 			// get our Click document, we only have access to our own click document
 		    var clickObj = Clicks.findOne();
 		    // if it exists, return the count field
 		    return clickObj && clickObj.count;
-  		}
-    });
-
-    Template.hello.helpers(
-	{
+  		},
 		answer: function () {
 			var labelObj = Labels.findOne();
 			return labelObj && labelObj.label;
+		},
+		people: function () {
+	 		return Session.get("peopleCount") || "Loading";
 		}
     });
 
-    Template.hello.events(
+	
+
+ 	Template.hello.events(
     {
 		'click button#clickMe': function () {
-			update our Clicks document
+			// update our Clicks document
 		    Meteor.call('incClicks');
-		    // return userlist;
-		    Meteor.call('getUsers', function (error, result) {
-  				if (error) {
-    				// handle error
-    				console.log(error);
-  				} else {
-    				return result;
-    			}
-  			});
-
-		
-		}
-    });
-
-    Template.hello.events({
-	// 	'click button#confirmLabel': function (e) {
-	// 		// update our Labels document
-	// 		var text = event.target.text.value;
-	// 	    Meteor.call('confirmLabel');
-	// }
+		},
+		// 'click button#confirmLabel': function (e) {
+		// 	// update our Labels document
+		// 	var text = event.target.text.value;
+		//     Meteor.call('confirmLabel');
+		// }
 		'submit .mark': function (e) {
 		    e.preventDefault();
 		    // update our Labels document
 			var piclabel = e.target.picLabel.value;
 			// Labels.update({}, {$set: {label: piclabel}});
 			Meteor.call('updateLabel',piclabel);
+		},
+		'click button#exitSurvey': function () {
+		    Meteor.call('goToExitSurvey');
 		}
     });
 
-
-
-    Template.hello.events({
-		'click button#exitSurvey': function () {
-		    Meteor.call('goToExitSurvey');
-	}
-    });
-
     Template.survey.events({
-	'submit .survey': function (e) {
-	    e.preventDefault();
-	    var results = {confusing: e.target.confusing.value,
-			   feedback: e.target.feedback.value};
-	    TurkServer.submitExitSurvey(results);
-	}
-});
+		'submit .survey': function (e) {
+		    e.preventDefault();
+		    var results = {confusing: e.target.confusing.value,
+				   feedback: e.target.feedback.value};
+		    TurkServer.submitExitSurvey(results);
+		}
+	});
