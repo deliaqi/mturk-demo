@@ -8,3 +8,6 @@ TurkServer.partitionCollection(Clicks);
 // add answer
 Labels = new Mongo.Collection('labels');
 TurkServer.partitionCollection(Labels);
+
+Answers = new Mongo.Collection('answers');
+TurkServer.partitionCollection(Answers);

@@ -17,10 +17,10 @@
     <p>You've pressed the button {{counter}} times.</p>
   </div>
 
-  {{#each counter}}
+<!--   {{#each counter}}
     <h1>{{workerId}}</h1>
     <p>{{_id}}</p>
-  {{/each}}
+  {{/each}} -->
 
   <div class="container">
       <h2>陌生人关系实验室</h2>
@@ -29,34 +29,33 @@
 
       <div class="row" >
           <p ><br/><strong>1. 如果可以跟世上任何人共进晚餐, 你会选择谁?</strong></p>
-          <p>Given the choice of anyone in the world, whom would you want as a dinner guest?</p>
+          <p>Given the choice of anyone in the world, who would you want as a dinner guest?</p>
           <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案</p>
+             <p>对方的答案  {{anotherAnswer 1}}</p>
           </div>
           <div class="col-xs-6 col-sm-6" >
              <!-- <textarea name="question1" type="text" rows="1">请输入你的答案</textarea><br/>   -->
-             <input type="text" placeholder="请输入你的答案">
+             <input id="answer1" type="text" placeholder="请输入你的答案" value="{{getAnswer 1}}">
           </div>
       </div>
       <div class="row" >
           <p><br/><strong>2. 你会想出名吗? 以什么样方式出名呢?</strong></p>
           <p>Would you like to be famous? In what way?</p>
           <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案</p>
+             <p>对方的答案  {{anotherAnswer 2}}</p>
           </div>
           <div class="col-xs-6 col-sm-6" >
              <!-- <textarea name="question1" rows="1">请输入你的答案</textarea><br/>   -->
-             <input type="text" placeholder="请输入你的答案">
+             <input id="answer2" type="text" placeholder="请输入你的答案" value="{{getAnswer 2}}">
           </div>
       </div>
-      <div class="row" >
+<!--       <div class="row" >
           <p><br/><strong>3. 在打一通电话之前, 你会先排演要在电话中说什么吗? 为什么?</strong></p>
           <p>Before making a telephone call, do you ever rehearse what you are going to say? Why?</p>
           <div class="col-xs-6 col-sm-6" >
              <p>对方的答案</p>
           </div>
           <div class="col-xs-6 col-sm-6" >
-             <!-- <textarea name="question1" rows="1">请输入你的答案</textarea><br/>   -->
              <input type="text" placeholder="请输入你的答案">
           </div>
       </div>
@@ -67,7 +66,6 @@
              <p>对方的答案</p>
           </div>
           <div class="col-xs-6 col-sm-6" >
-             <!-- <textarea name="question1" rows="1">请输入你的答案</textarea><br/>   -->
              <input type="text" placeholder="请输入你的答案">
           </div>
       </div>
@@ -78,7 +76,6 @@
              <p>对方的答案</p>
           </div>
           <div class="col-xs-6 col-sm-6" >
-             <!-- <textarea name="question1" rows="1">请输入你的答案</textarea><br/>   -->
              <input type="text" placeholder="请输入你的答案">
           </div>
       </div>
@@ -89,10 +86,9 @@
              <p>对方的答案</p>
           </div>
           <div class="col-xs-6 col-sm-6" >
-             <!-- <textarea name="question1" rows="1">请输入你的答案</textarea><br/>   -->
              <input type="text" placeholder="请输入你的答案">
           </div>
-      </div>
+      </div> -->
  </div>
   
 
@@ -100,7 +96,7 @@
 
   <form class="mark container">
     <p>如果愿意，可以留下你的电子邮箱：</p>
-    <textarea name="picLabel" rows="1">{{answer}}</textarea><br/>
+    <textarea name="picLabel" rows="1">{{email}}</textarea><br/>
     <!-- <button id="confirmLabel">确定答案</button> -->
     <button type="submit" class="btn btn-primary">确定上传</button>
     <button id="exitSurvey" class="btn btn-primary">完成实验</button>

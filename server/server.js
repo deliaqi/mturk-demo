@@ -3,26 +3,32 @@ Meteor.startup(function () {
 	var batch = TurkServer.Batch.getBatchByName("main");
 	// batch.setAssigner(new TurkServer.Assigners.SimpleAssigner);
 	batch.setAssigner(new TurkServer.Assigners.TestAssigner);
-    });
+});
 
-    TurkServer.initialize(function() { // the start of an experiment
+TurkServer.initialize(function() { // the start of an experiment
 	var clickObj = {count: 0};
 	Clicks.insert(clickObj);
 	// intialize for label
 	var labelObj = {label: 'Your email address'};
 	Labels.insert(labelObj);
-    });
+});
 
-    Meteor.publish('clicks', function() {
+
+
+Meteor.publish('clicks', function() {
 	return Clicks.find();
-    });
+});
 
-    Meteor.publish('labels', function() {
+Meteor.publish('labels', function() {
 	return Labels.find();
-    });
+});
+
+Meteor.publish('answers', function() {
+	return Answers.find();
+});
 
 
-    Meteor.methods({
+Meteor.methods({
 	goToExitSurvey: function() {
 	    TurkServer.Instance.currentInstance().teardown();
 	},
@@ -42,5 +48,8 @@ Meteor.startup(function () {
 	getUsersCount: function() {
 		var userlist = TurkServer.Instance.currentInstance().users();
 		return userlist.length;
-	}
- });
+	},
+	saveAnswer: function(number, realAnswer) {
+		Answers.upsert({user: Meteor.userId(), no: number}, {$set: {answer: realAnswer}});
+	},
+})
