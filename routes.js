@@ -11,6 +11,6 @@ Router.route('/survey', function() {
     this.render('survey');
 });
 
-// Router.route('/lobby', function() {
-//   this.render('lobby');
-// });
+Router.route('/lobby', function() {
+  this.render('lobby');
+});

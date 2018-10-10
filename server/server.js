@@ -2,7 +2,8 @@ Meteor.startup(function () {
 	Batches.upsert({name: "main"}, {name: "main", active: true});
 	var batch = TurkServer.Batch.getBatchByName("main");
 	// batch.setAssigner(new TurkServer.Assigners.SimpleAssigner);
-	batch.setAssigner(new TurkServer.Assigners.TestAssigner);
+	const assigner = new TurkServer.Assigners.PairAssigner;
+	batch.setAssigner(assigner);
 });
 
 TurkServer.initialize(function() { // the start of an experiment
