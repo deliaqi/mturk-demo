@@ -12,95 +12,118 @@
 
 
 <template name="hello">
-  <div class="container">
+  <!-- <div class="container">
     <button id="clickMe" class="btn btn-primary">Click Me</button>
     <p>You've pressed the button {{counter}} times.</p>
-  </div>
+  </div> -->
 
 <!--   {{#each counter}}
     <h1>{{workerId}}</h1>
     <p>{{_id}}</p>
   {{/each}} -->
 
+    <!--巨幕-->
+    <div class="jumbotron">
+ 
+        <div class="container">
+            <h1>陌生人关系实验室</h1>
+ 
+            <p>当前在线人数：{{people}}</p>
+ 
+            <p><a class="btn btn-primary btn-lg" href="http://36questionsinlove.com" role="button">Learn more »</a></p>
+        </div>
+    </div>
+
+
   <div class="container">
-      <h2>陌生人关系实验室</h2>
-      <p>当前在线人数：{{people}}</p>
-      <img src="img/love.jpg" class="img-rounded" width="600" height="300">
+      <!-- <img src="img/love.jpg" class="img-rounded" width="600" height="300"> -->
 
       <div class="row" >
-          <p ><br/><strong>1. 如果可以跟世上任何人共进晚餐, 你会选择谁?</strong></p>
-          <p>Given the choice of anyone in the world, who would you want as a dinner guest?</p>
-          <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案  {{anotherAnswer 1}}</p>
+          <div class="col-md-4">
+                <h3>1. 如果可以跟世上任何人共进晚餐, 你会选择谁?</h3>
+                <p>Given the choice of anyone in the world, who would you want as a dinner guest?</p>
+                <!-- <input class="btn btn-default" type="button" value="View details »"> -->
+            </div>
+          <div class="col-md-4" >
+             <h3 class="text-muted">TA说</h3>
+             <p class="p1 text-muted">:{{anotherAnswer 1}}</p>
           </div>
-          <div class="col-xs-6 col-sm-6" >
-             <!-- <textarea name="question1" type="text" rows="1">请输入你的答案</textarea><br/>   -->
-             <input id="answer1" type="text" placeholder="请输入你的答案" value="{{getAnswer 1}}">
+          <div class="col-md-4" >
+             <h3 class="text-muted">你说</h3>
+             <input id="answer1" type="text" class="form-control" placeholder="..." style="height:100px" value="{{getAnswer 1}}">
           </div>
       </div>
+      <hr>
       <div class="row" >
-          <p><br/><strong>2. 你会想出名吗? 以什么样方式出名呢?</strong></p>
-          <p>Would you like to be famous? In what way?</p>
-          <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案  {{anotherAnswer 2}}</p>
+          <div class="col-md-4">
+                <h3>2. 你会想出名吗? 以什么样方式出名呢?</h3>
+                <p>Would you like to be famous? In what way?</p>
+                <!-- <input class="btn btn-default" type="button" value="View details »"> -->
+            </div>
+          <div class="col-md-4" >
+             <p class="p1 text-muted">:{{anotherAnswer 2}}</p>
           </div>
-          <div class="col-xs-6 col-sm-6" >
-             <!-- <textarea name="question1" rows="1">请输入你的答案</textarea><br/>   -->
-             <input id="answer2" type="text" placeholder="请输入你的答案" value="{{getAnswer 2}}">
-          </div>
-      </div>
-<!--       <div class="row" >
-          <p><br/><strong>3. 在打一通电话之前, 你会先排演要在电话中说什么吗? 为什么?</strong></p>
-          <p>Before making a telephone call, do you ever rehearse what you are going to say? Why?</p>
-          <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案</p>
-          </div>
-          <div class="col-xs-6 col-sm-6" >
-             <input type="text" placeholder="请输入你的答案">
+          <div class="col-md-4" >
+             <input id="answer2" type="text" placeholder="..." class="form-control" style="height:100px" value="{{getAnswer 2}}">
           </div>
       </div>
+      <hr>
       <div class="row" >
-          <p><br/><strong>4. 你心中最完美的一天是做哪些事呢?</strong></p>
-          <p>What would constitute a "perfect" day for you?</p>
-          <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案</p>
+          <div class="col-md-4">
+                <h3>3. 在打一通电话之前, 你会先排演要在电话中说什么吗? 为什么?</h3>
+                <p>Before making a telephone call, do you ever rehearse what you are going to say? Why?</p>
+                <!-- <input class="btn btn-default" type="button" value="View details »"> -->
+            </div>
+          <div class="col-md-4" >
+             <p class="p1 text-muted">:{{anotherAnswer 3}}</p>
           </div>
-          <div class="col-xs-6 col-sm-6" >
-             <input type="text" placeholder="请输入你的答案">
-          </div>
-      </div>
-      <div class="row" >
-          <p><br/><strong>5. 你上一次唱歌给自己听是什么时候? 上一次唱给别人听又是何时?</strong></p>
-          <p>When did you last sing to yourself? To someone else?</p>
-          <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案</p>
-          </div>
-          <div class="col-xs-6 col-sm-6" >
-             <input type="text" placeholder="请输入你的答案">
+          <div class="col-md-4" >
+             <input id="answer3" type="text" placeholder="..." class="form-control" style="height:100px" value="{{getAnswer 3}}">
           </div>
       </div>
+      <hr>
       <div class="row" >
-          <p><br/><strong>6. 如果你可以活到90岁, 并能在30岁过后让体态或大脑一直保持30岁的状态到死, 你会选保持体态还是大脑呢?</strong></p>
-          <p>If you were able to live to the age of 90 and retain either the mind or body of a 30-year-old for the last 60 years of your life, which would you want?</p>
-          <div class="col-xs-6 col-sm-6" >
-             <p>对方的答案</p>
+          <div class="col-md-4">
+                <h3>4. 你心中最完美的一天是做哪些事呢?</h3>
+                <p>What would constitute a “perfect” day for you?</p>
+                <!-- <input class="btn btn-default" type="button" value="View details »"> -->
+            </div>
+          <div class="col-md-4" >
+             <p class="p1 text-muted">:{{anotherAnswer 4}}</p>
           </div>
-          <div class="col-xs-6 col-sm-6" >
-             <input type="text" placeholder="请输入你的答案">
+          <div class="col-md-4" >
+             <input id="answer4" type="text" placeholder="..." class="form-control" style="height:100px" value="{{getAnswer 4}}">
           </div>
-      </div> -->
+      </div>
+      <hr>
+      <div class="row" >
+          <div class="col-md-4">
+                <h3>5. 你上一次唱歌给自己听是什么时候? 上一次唱给别人听又是何时?</h3>
+                <p>When did you last sing to yourself? To someone else?</p>
+                <!-- <input class="btn btn-default" type="button" value="View details »"> -->
+            </div>
+          <div class="col-md-4" >
+             <p class="p1 text-muted">:{{anotherAnswer 5}}</p>
+          </div>
+          <div class="col-md-4" >
+             <input id="answer5" type="text" placeholder="..." class="form-control" style="height:100px" value="{{getAnswer 5}}">
+          </div>
+      </div>
+      <hr>
+
  </div>
   
 
 
 
-  <form class="mark container">
-    <p>如果愿意，可以留下你的电子邮箱：</p>
-    <textarea name="picLabel" rows="1">{{email}}</textarea><br/>
+  <form class="container">
+    <!-- <p>如果愿意，可以留下你的电子邮箱：</p> -->
+    <!-- <textarea name="picLabel" rows="1">{{email}}</textarea><br/> -->
     <!-- <button id="confirmLabel">确定答案</button> -->
-    <button type="submit" class="btn btn-primary">确定上传</button>
+    <!-- <button type="submit" class="btn btn-primary">确定上传</button> -->
     <button id="exitSurvey" class="btn btn-primary">完成实验</button>
-    <button id="exitSurvey" class="btn btn-primary">完成实验</button>
+    <hr>
+
   </form>
 
   <!-- <button id="exitSurvey" class="btn btn-primary">完成任务</button> -->

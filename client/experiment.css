@@ -13,5 +13,11 @@
 .row
 {
     text-align:center;
+    /*background-color: red;*/
     /*color:red;*/
+}
+
+p.p1{
+	background-color: #F0F0F0;
+	height:100px;
 }
