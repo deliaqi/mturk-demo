@@ -16,9 +16,12 @@ Tracker.autorun(function() { //every time the value of this variable changes
     Meteor.subscribe('labels', group);
 
     Meteor.subscribe('answers', group);
+
+    Meteor.subscribe('questions', group);
 });
 
 Template.hello.created = function () {
+	Session.set("questionNum", 1);
 	Meteor.call('getUsersCount', function (error, result) {
 		if (error) {
 			console.log(error);
@@ -43,12 +46,26 @@ Template.hello.helpers(
 	people: function () {
  		return Session.get("peopleCount") || "Loading";
 	},
-	getAnswer: function (number) {
-		var answer = Answers.findOne({user:Meteor.userId(), no: number.toString()});
+	roundNum: function () {
+		var currentRound = RoundTimers.findOne({}, { sort: { index: -1 } });
+		var roundNum = currentRound.index;
+		Session.set("questionNum", roundNum);
+		return roundNum;
+	},
+	question: function () {
+		var roundNum = Session.get("questionNum");
+		var question = Questions.findOne({num: roundNum});
+		return question && question.question;
+	},
+	getAnswer: function () {
+		var roundNum = Session.get("questionNum");
+		console.log(roundNum)
+		var answer = Answers.findOne({user:Meteor.userId(), no: roundNum});
 		return answer && answer.answer;
 	},
-	anotherAnswer: function (number) {
-		var answer = Answers.findOne({user: {$ne: Meteor.userId()}, no: number.toString()});
+	anotherAnswer: function () {
+		var roundNum = Session.get("questionNum");
+		var answer = Answers.findOne({user: {$ne: Meteor.userId()}, no: roundNum});
 		return answer && answer.answer;
 	}
 });
@@ -78,13 +95,10 @@ Template.hello.events(
 	},
 	'keydown input': function (e) {
 		if (e.keyCode == 13) {
-			var id = e.target.id;
-			id = id.replace("answer", "");
-			var answer = document.getElementById("answer" + id).value;
+			var num = Session.get("questionNum");
+			var answer = e.target.value;
 
-			console.log(e);
-			console.log(id + answer)
-			Meteor.call('saveAnswer', id, answer);
+			Meteor.call('saveAnswer', num, answer);
 		}
 	}
 });
