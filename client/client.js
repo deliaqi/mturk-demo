@@ -52,20 +52,25 @@ Template.hello.helpers(
 		Session.set("questionNum", roundNum);
 		return roundNum;
 	},
-	question: function () {
+	onequestion: function () {
 		var roundNum = Session.get("questionNum");
 		var question = Questions.findOne({num: roundNum});
 		return question && question.question;
 	},
-	getAnswer: function () {
+	questions: function () {
 		var roundNum = Session.get("questionNum");
-		console.log(roundNum)
-		var answer = Answers.findOne({user:Meteor.userId(), no: roundNum});
+		var questions = Questions.find({setNum: roundNum});
+		return questions;
+	},
+	getAnswer: function (number) {
+		// var roundNum = Session.get("questionNum");
+		// console.log(roundNum)
+		var answer = Answers.findOne({user:Meteor.userId(), no: number.toString()});
 		return answer && answer.answer;
 	},
-	anotherAnswer: function () {
-		var roundNum = Session.get("questionNum");
-		var answer = Answers.findOne({user: {$ne: Meteor.userId()}, no: roundNum});
+	anotherAnswer: function (number) {
+		// var roundNum = Session.get("questionNum");
+		var answer = Answers.findOne({user: {$ne: Meteor.userId()}, no: number.toString()});
 		return answer && answer.answer;
 	}
 });
@@ -93,12 +98,20 @@ Template.hello.events(
 	'click button#exitSurvey': function () {
 	    Meteor.call('goToExitSurvey');
 	},
+	// 'keydown input': function (e) {
+	// 	if (e.keyCode == 13) {
+	// 		var num = Session.get("questionNum");
+	// 		var answer = e.target.value;
+
+	// 		Meteor.call('saveAnswer', num, answer);
+	// 	}
+	// }
 	'keydown input': function (e) {
 		if (e.keyCode == 13) {
-			var num = Session.get("questionNum");
-			var answer = e.target.value;
+			var id = e.target.id;
+			var answer = document.getElementById(id).value;
 
-			Meteor.call('saveAnswer', num, answer);
+			Meteor.call('saveAnswer', id, answer);
 		}
 	}
 });

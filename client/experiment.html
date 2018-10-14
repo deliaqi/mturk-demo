@@ -29,33 +29,50 @@
             <h1>陌生人关系实验室</h1>
  
             <p>当前在线人数：{{people}}</p>
- 
+            <p>一共三组问题，一组包括十二套问题，请在15分钟内完成每一套问题。</p>
             <p><a class="btn btn-primary btn-lg" href="http://36questionsinlove.com" role="button">Learn more »</a></p>
         </div>
     </div>
 
 
+
   <div class="container">
       <!-- <img src="img/love.jpg" class="img-rounded" width="600" height="300"> -->
-
-         <div class="row" >
+        <div class="row" >
             <div class="col-md-4">
               <div class="post-preview"></div>
-                  <h3 class="post-title">{{roundNum}}. {{question}}</h3>
-                  <h4 class="post-subtitle">Given the choice of anyone in the world, who would you want as a dinner guest?</h4>
+                  <h1 class="post-title">第 {{roundNum}} 组</h1>
               </div>
 
             <div class="col-md-4" >
-              <h5 class="text-muted">TA说</h5>
-               <p class="p1 text-muted">:{{anotherAnswer}}</p>
+              <h1 class="text-muted">TA说</h1>
             </div>
             <div class="col-md-4" >
-               <h5 class="text-muted">你说</h5>
-               <input id="answer" type="text" class="form-control" placeholder="..." style="height:100px" value="{{getAnswer}}">
+               <h1 class="text-muted">你说</h1>
+            </div>
+        </div>
+
+       {{#each questions}}
+       <div class="row" >
+            <div class="col-md-4">
+              <div class="post-preview"></div>
+                  <h3 class="post-title">{{num}}. {{question}}</h3>
+                  <!-- <h4 class="post-subtitle">Given the choice of anyone in the world, who would you want as a dinner guest?</h4> -->
+              </div>
+
+            <div class="col-md-4" >
+              <!-- <h5 class="text-muted">TA说</h5> -->
+               <p class="p1 text-muted">{{anotherAnswer num}}</p>
+            </div>
+            <div class="col-md-4" >
+               <!-- <h5 class="text-muted">你说</h5> -->
+               <input id={{num}} type="text" class="form-control" placeholder="..." style="height:130px" value="{{getAnswer num}}">
             </div>
 
         </div>
        <hr>
+       {{/each}}
+
  </div>
   
 
