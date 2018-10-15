@@ -20,11 +20,13 @@ TurkServer.initialize(function() { // the start of an experiment
 	Answers.upsert({user: users[1], no: 1}, {$set: {answer: ""}});
 
 	Meteor.call('initQuestion');
+	// Timer.upsert({user: Meteor.userId(), currentTimer: 0}); 
+	Meteor.call('updateTimer', 0);
 });
 
 TurkServer.initialize (function () {
 	var start = new Date();
-    var end = new Date(start.getTime() + 60000);
+    var end = new Date(start.getTime() + 600000);
     TurkServer.Timers.startNewRound(start, end);
 });
 
@@ -33,10 +35,12 @@ TurkServer.Timers.onRoundEnd(function(reason) {
     	var currentRound = RoundTimers.findOne({}, { sort: { index: -1 } });
     	if (currentRound.index < 3) {
 	    	var start = new Date();
-	    	var end = new Date(start.getTime() + 60000);
-			TurkServer.Timers.startNewRound(start, end);    		
+	    	var end = new Date(start.getTime() + 600000);
+			TurkServer.Timers.startNewRound(start, end); 
+			Meteor.call('updateTimer', 0);
     	} else {
     		Meteor.call('goToExitSurvey');
+    		Meteor.call('updateTimer', 0);
     	}
     }
 });
@@ -54,6 +58,10 @@ Meteor.publish('answers', function() {
 });
 Meteor.publish('questions', function() {
 	return Questions.find();
+});
+
+Meteor.publish('timer', function() {
+	return Timer.find();
 });
 
 Meteor.methods({
@@ -117,6 +125,8 @@ Meteor.methods({
 		Questions.upsert({num: 34, setNum: 3}, {$set: {question: "你的家着火了, 里面有你所拥有的一切事物. 在救出你爱的人, 你的宠物后, 你还有时间最后再冲回去一趟拯救最后一样任何东西, 你会救出什么? 为什么?"}});
 		Questions.upsert({num: 35, setNum: 3}, {$set: {question: "你家庭中的所有人里, 谁的死会让你最难受? 为什么?"}});
 		Questions.upsert({num: 36, setNum: 3}, {$set: {question: "分享一个你私人的问题, 并想你对面的人询问ta会怎么处理. 之后再请ta回答, 对于你选这个问题, ta有什么看法?"}});
-
-	}
+	},
+	updateTimer: function(curtime) {
+		Timer.upsert({user: Meteor.userId()}, {$set: {currentTimer: curtime}});
+	},
 })

@@ -1,3 +1,14 @@
+
+
+var myInterval = Meteor.setInterval(function(){
+	  // var timer = Timer.findOne({user:Meteor.userId()});
+	  var curtimer = Session.get("curTimer");
+      curtimer ++;
+      Session.set("curTimer", curtimer);
+      // var progress = parseInt(100 * curtimer / ( 60 * 15 ));
+      console.log("Interval called " + curtimer + " times" + "width: "+ progress +"%");
+   }, 1000);
+
 Tracker.autorun(function() {
 	if (TurkServer.inExperiment()) {
 	    Router.go('/experiment');
@@ -18,9 +29,17 @@ Tracker.autorun(function() { //every time the value of this variable changes
     Meteor.subscribe('answers', group);
 
     Meteor.subscribe('questions', group);
+
+    Meteor.subscribe('timer', group);
 });
 
 Template.hello.created = function () {
+	var curtimer = Timer.findOne({user:Meteor.userId()},{currentTimer : 1});
+	if( curtimer && curtimer > 0) {
+		Session.set("curTimer", curtimer);
+	} else {
+		Session.set("curTimer", 0);
+	}
 	Session.set("questionNum", 1);
 	Meteor.call('getUsersCount', function (error, result) {
 		if (error) {
@@ -72,9 +91,22 @@ Template.hello.helpers(
 		// var roundNum = Session.get("questionNum");
 		var answer = Answers.findOne({user: {$ne: Meteor.userId()}, no: number.toString()});
 		return answer && answer.answer;
-	}
+	},
+	currentTimer: function (number) {
+		var curtimer = Session.get("curTimer");
+		Meteor.call('updateTimer', curtimer);
+		// var timer = Timer.findOne({user:Meteor.userId()});
+		// return timer && timer.currentTimer;
+		var m = parseInt(curtimer / 60);
+        var s = parseInt(curtimer % 60);
+		return m + "分" + s + "秒";
+	},
+	progress: function () {
+		var progress = 0;
+		progress = Session.get("curTimer");
+		return parseInt(100 * progress / ( 1000 * 60 * 15 ));
+	},
 });
-
 
 
 Template.hello.events(
@@ -98,14 +130,6 @@ Template.hello.events(
 	'click button#exitSurvey': function () {
 	    Meteor.call('goToExitSurvey');
 	},
-	// 'keydown input': function (e) {
-	// 	if (e.keyCode == 13) {
-	// 		var num = Session.get("questionNum");
-	// 		var answer = e.target.value;
-
-	// 		Meteor.call('saveAnswer', num, answer);
-	// 	}
-	// }
 	'keydown input': function (e) {
 		if (e.keyCode == 13) {
 			var id = e.target.id;
