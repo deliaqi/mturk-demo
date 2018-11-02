@@ -13,5 +13,3 @@ Answers = new Mongo.Collection('answers');
 TurkServer.partitionCollection(Answers);
 
 Questions = new Mongo.Collection('questions');
-
-Timer = new Mongo.Collection('timer');

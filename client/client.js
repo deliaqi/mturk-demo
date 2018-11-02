@@ -1,12 +1,7 @@
 
 
 var myInterval = Meteor.setInterval(function(){
-	  // var timer = Timer.findOne({user:Meteor.userId()});
-	  var curtimer = Session.get("curTimer");
-      curtimer ++;
-      Session.set("curTimer", curtimer);
-      // var progress = parseInt(100 * curtimer / ( 60 * 15 ));
-      console.log("Interval called " + curtimer + " times" + "width: "+ progress +"%");
+	  Session.set("current", new Date());
    }, 1000);
 
 Tracker.autorun(function() {
@@ -29,17 +24,15 @@ Tracker.autorun(function() { //every time the value of this variable changes
     Meteor.subscribe('answers', group);
 
     Meteor.subscribe('questions', group);
-
-    Meteor.subscribe('timer', group);
 });
 
 Template.hello.created = function () {
-	var curtimer = Timer.findOne({user:Meteor.userId()},{currentTimer : 1});
-	if( curtimer && curtimer > 0) {
-		Session.set("curTimer", curtimer);
-	} else {
-		Session.set("curTimer", 0);
-	}
+	// var curtimer = Timer.findOne({user:Meteor.userId()},{currentTimer : 1});
+	// if( curtimer && curtimer > 0) {
+	// 	Session.set("curTimer", curtimer);
+	// } else {
+	// 	Session.set("curTimer", 0);
+	// }
 	Session.set("questionNum", 1);
 	Meteor.call('getUsersCount', function (error, result) {
 		if (error) {
@@ -92,19 +85,18 @@ Template.hello.helpers(
 		var answer = Answers.findOne({user: {$ne: Meteor.userId()}, no: number.toString()});
 		return answer && answer.answer;
 	},
-	currentTimer: function (number) {
-		var curtimer = Session.get("curTimer");
-		Meteor.call('updateTimer', curtimer);
-		// var timer = Timer.findOne({user:Meteor.userId()});
-		// return timer && timer.currentTimer;
-		var m = parseInt(curtimer / 60);
-        var s = parseInt(curtimer % 60);
-		return m + "分" + s + "秒";
-	},
 	progress: function () {
 		var progress = 0;
 		progress = Session.get("curTimer");
 		return parseInt(100 * progress / ( 1000 * 60 * 15 ));
+	},
+	timer: function () {
+		var currentRound = RoundTimers.findOne({}, { sort: { index: -1 }});
+		var current = Session.get("current");
+		var curTimer = (current - currentRound.startTime) / 1000;
+		var m = parseInt(curTimer / 60);
+        var s = parseInt(curTimer % 60);
+		return m + "分" + s + "秒";
 	},
 });
 
